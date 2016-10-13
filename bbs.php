@@ -101,7 +101,7 @@
             </div>
           </div>
           <!-- つぶやくボタン -->
-          <button type="submit" class="btn btn-primary col-xs-12" disabled>つぶやく</button>
+          <button type="submit" class="btn btn-primary col-xs-2" disabled>つぶやく</button>
         </form>
       </div>
 
@@ -109,8 +109,13 @@
       <div class="col-md-8 content-margin-top">
         <div class="timeline-centered">
 
-         <?php 
-        foreach ($posts as $post_each) { ?>
+        <?php 
+        foreach ($posts as $post_each) { 
+          //一旦日付型に変換
+          $created = strtotime($post_each['created']);
+          //書式を変換
+          $created = date('Y/m/d',$created);
+          ?>
 
           <article class="timeline-entry">
               <div class="timeline-entry-inner">
@@ -119,11 +124,14 @@
                       <i class="fa fa-cogs"></i>
                   </div>
                   <div class="timeline-label">
-                      <h2><a href="#"><?php echo $post_each['nickname']?></a> <span><?php echo $post_each['created'] ?></span></h2>
-                      <p><?php echo $post_each['comment']?></p>
+                      <h2><a href="#"><?php echo $post_each['nickname']; ?></a> <span><?php echo $created; ?></span></h2>
+                      <p><?php echo $post_each['comment']; ?></p>
                   </div>
               </div>
+
           </article>
+
+        
           <?php } ?>
 
           <article class="timeline-entry begin">
@@ -145,24 +153,24 @@
   <script src="assets/js/bootstrap.js"></script>
   <script src="assets/js/form.js"></script>
 
-    <ul>
+<!--     <ul>
       <?php 
-        foreach ($posts as $post_each) {
-            echo '<li>';
-            echo $post_each['nickname'].' ';
-            echo $post_each['comment'].' ';
+        // foreach ($posts as $post_each) {
+        //     echo '<li>';
+        //     echo $post_each['nickname'].' ';
+        //     echo $post_each['comment'].' ';
 
-            //一旦日付型に変換
-            $created = strtotime($post_each['created']);
+        //     //一旦日付型に変換
+        //     $created = strtotime($post_each['created']);
 
-            //書式を変換
-            $created = date('Y/m/d',$created);
+        //     //書式を変換
+        //     $created = date('Y/m/d',$created);
 
-            echo $created;
-            echo '</li>';
-        }
+        //     echo $created;
+        //     echo '</li>';
+        // }
       ?>
-    </ul>
+    </ul> -->
 </body>
 </html>
 
